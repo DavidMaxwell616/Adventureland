@@ -1,0 +1,15 @@
+table, th, td {
+    color: white;
+    border: 1px solid white;
+  }
+  body {
+    background-color: black;
+    font-family: verdana;
+}
+  h1 {
+    color: cornflowerblue;
+    align-items: center;
+  }
+  p {
+    color: red;
+  }
