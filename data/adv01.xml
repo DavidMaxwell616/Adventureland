@@ -2227,13 +2227,13 @@ something and then makes 'ME' vanish!</Message>
   <Message>Not here.</Message>
   <Message>Try the swamp</Message>
   <Message>Sizzle...</Message>
-  <Message>Try --> 'LOOK, JUMP, SWIM, CLIMB, FIND, TAKE, SCORE, DROP'
+  <Message>Try 'LOOK, JUMP, SWIM, CLIMB, FIND, TAKE, SCORE, DROP'
 and any other verbs you can think of...</Message>
   <Message>There are only 3 ways to wake the Dragon!</Message>
   <Message>Remember you can always say `HELP`</Message>
   <Message>Read the sign in the meadow!</Message>
   <Message>You may need to say magic words here</Message>
-  <Message> BOOOOMS out:</Message>
+  <Message>A VOICE BOOOOMS OUT:</Message>
   <Message>please leave it alone</Message>
   <Message>Sorry, I can only throw the ax.</Message>
   <Message>Medicine is good for bites.</Message>

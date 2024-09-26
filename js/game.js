@@ -5,25 +5,25 @@ var noun="";
 var NounText="";
 
 var disable_sysfunc=0; // recursion block
-
+var images = [];
 var DARKBIT=15;
 var LIGHTOUTBIT=16;
 var LIGHT_SOURCE=9;
 var CARRIED=255;
 var DESTROYED=0;
 var RoomSaved=new Array(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
-debugflag = false;
+const debug = false;
 function MainLine() {
     ClearScreen();
 // this is the inside of the main loop. This should get punched when the user hits enter
 GetInput(); // GetInput reads the command line
 // this used to be in GetImput, but lack of pointers caused me to move it back here
-    if (verb.toUpperCase()=="DEBUG") {
-	     debugflag=true;
-		 debug("Current room="+PlayerRoom);
-		 debug("BitFlags[DARKBIT]="+BitFlags[DARKBIT]);
-		 return;
-	} 
+    // if (verb.toUpperCase()=="DEBUG") {
+	//      debugflag=true;
+	// 	 console.log("Current room="+PlayerRoom);
+	// 	 console.log("BitFlags[DARKBIT]="+BitFlags[DARKBIT]);
+	// 	 return;
+	// } 
 	if(noun.length==0 && verb.length==1) {
 		switch( verb.toLowerCase() ) {
 			case 'n':verb="NORTH";break;
@@ -44,9 +44,9 @@ GetInput(); // GetInput reads the command line
 		vnum=WhichWord(verb,Verbs);
 		nnum=WhichWord(noun,Nouns);
 	} 
-	console.log("Verb="+verb+", noun="+noun+", vnum="+vnum+", nnmu="+nnum);
+	if(debug) console.log("Verb="+verb+", noun="+noun+", vnum="+vnum+", nnmu="+nnum);
 	if (vnum<=0) {
-	     Output("You use word(s) I don't know! ");
+	     OutputMessage("You use word(s) I don't know! ");
 		 return 0;
 	}
 	
@@ -54,9 +54,9 @@ GetInput(); // GetInput reads the command line
 	if (NounText==null) NounText="";
 	var pa=PerformActions(vnum,nnum);
 	switch(pa) {
-		case -1: Output("I don't understand your command. ");
+		case -1: OutputMessage("I don't understand your command. ");
 			break;
-		case -2: Output("I can't do that yet. ");
+		case -2: OutputMessage("I can't do that yet. ");
 			break;
 	}
 	
@@ -66,19 +66,34 @@ GetInput(); // GetInput reads the command line
 			BitFlags[LIGHTOUTBIT]=true;
 			if(Items[LIGHT_SOURCE].Location==CARRIED ||
 				Items[LIGHT_SOURCE].Location==PlayerRoom) {
-				Output("Light has run out! ");
+				OutputMessage("Light has run out! ");
 			}
 		} else if(LightTime<25) {
 			if(Items[LIGHT_SOURCE].Location==CARRIED ||
 				Items[LIGHT_SOURCE].Location==PlayerRoom) {
-					Output("Light runs out in ");
-					Output(LightTime);
-					Output(" turns. ");
+					OutputMessage("Light runs out in ");
+					OutputMessage(LightTime);
+					OutputMessage(" turns. ");
 			}
 		}
 	}
 	ShowStuff();
 }
+
+function LoadImages()
+{
+	for (let index = 1; index < 12; index++) {
+	image = new Image();
+	image.src = "assets/images/scene 0"+zfill(index)+".png";
+	image.onload = function() {
+	// Image has loaded, now hide it
+	image.style.display = "none";
+	};
+	images.push(image);
+	}
+}
+
+function zfill(num, len) {return (Array(len).join("0") + num).slice(-len);}
 
 function PerformLine(ct) {
   	var continuation=0;
@@ -86,7 +101,7 @@ function PerformLine(ct) {
 	var pptr=0;
 	var act=new Array(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
 	var cc=0;
-	debug("perform line ct="+ct);
+	if(debug) console.log("perform line ct="+ct);
 	for (cc=0;cc<5;cc++) {
 		var cv,dv;
 		cv=Actions[ct].Condition[cc];
@@ -184,18 +199,18 @@ function PerformLine(ct) {
 	act[2]=Math.floor(act[2]/150);
 	cc=0;
 	pptr=0;
-	debug("Actions act[0]="+act[0]+", act[1]="+act[1]+", act[2]="+act[2]+", act[3]="+act[3]);  
+	if(debug) console.log("Actions act[0]="+act[0]+", act[1]="+act[1]+", act[2]="+act[2]+", act[3]="+act[3]);  
 	for (cc=0;cc<4;cc++) {
 		if(act[cc]>=1 && act[cc]<52) {
-			Output(Messages[act[cc]]);
+			OutputMessage(Messages[act[cc]]);
 		} else if(act[cc]>101) {
-			Output(Messages[act[cc]-50]);
+			OutputMessage(Messages[act[cc]-50]);
 		} else switch(act[cc]) {
 			case 0:/* NOP */
 				break;
 			case 52:
 				if(CountCarried()==MaxCarry) {
-						Output("You are carrying too much. ");
+						OutputMessage("You are carrying too much. ");
 					break;
 				}
 				Items[param[pptr++]].Location= CARRIED;
@@ -226,7 +241,7 @@ function PerformLine(ct) {
 				BitFlags[param[pptr++]]=false;
 				break;
 			case 61:
-				Output("You are dead.<br>");
+				OutputMessage("You are dead.<br>");
 				BitFlags[DARKBIT]=false;
 				PlayerRoom=NumRooms;/* It seems to be what the code says! */
 				Look();
@@ -238,7 +253,7 @@ function PerformLine(ct) {
 				break;
 			}
 			case 63:
-				Output("The game is now over.<br>");
+				OutputMessage("The game is now over.<br>");
 			case 64:
 				Look();
 				break;
@@ -251,14 +266,14 @@ function PerformLine(ct) {
 					  	n++;
 					ct++;
 				}
-				Output("You have stored ");
-				Output(n);
-				Output(" treasures.  On a scale of 0 to 100, that rates ");
-				Output((n*100)/Treasures);
-				Output(".<br>");
+				OutputMessage("You have stored ");
+				OutputMessage(n);
+				OutputMessage(" treasures.  On a scale of 0 to 100, that rates ");
+				OutputMessage((n*100)/Treasures);
+				OutputMessage(".<br>");
 				if(n==Treasures){
-					Output("Well done.<br>");
-					Output("The game is now over.<br>");
+					OutputMessage("Well done.<br>");
+					OutputMessage("The game is now over.<br>");
 				}
 				break;
 			}
@@ -266,15 +281,15 @@ function PerformLine(ct) {
 			{
 				var ct=0;
 				var f=0;
-					Output("You are carrying:<br>");
+					OutputMessage("You are carrying:<br>");
 				for(ct=0;ct<Items.length;ct++) {
 					if(Items[ct].Location==CARRIED) {
 						f=1;
-						Output(Items[ct].Text);
+						OutputMessage(Items[ct].Text);
 					}
 				}
 				if(f==0) {
-					Output("Nothing");
+					OutputMessage("Nothing");
 				}
 				break;
 			}
@@ -294,7 +309,7 @@ function PerformLine(ct) {
 				break;
 			case 71:
 				SaveGame();
-				Output("Saving game");
+				OutputMessage("Saving game");
 				break;
 			case 72:
 			{
@@ -326,7 +341,7 @@ function PerformLine(ct) {
 					CurrentCounter--;
 				break;
 			case 78:
-				Output(CurrentCounter);
+				OutputMessage(CurrentCounter);
 				break;
 			case 79:
 				CurrentCounter=param[pptr++];
@@ -361,14 +376,14 @@ function PerformLine(ct) {
 				   know if there is a maximum value to limit too */
 				break;
 			case 84:
-				Output(NounText);
+				OutputMessage(NounText);
 				break;
 			case 85:
-				Output(NounText);
-				Output("<br>");
+				OutputMessage(NounText);
+				OutputMessage("<br>");
 				break;
 			case 86:
-				Output("<br>");
+				OutputMessage("<br>");
 				break;
 			case 87:  {
 				/* Changed this to swap location<->roomflag[x]
@@ -390,28 +405,21 @@ function PerformLine(ct) {
 				/* Poking this into older spectrum games causes a crash */
 				break;
 			default:
-				Output("Unknown action "+act[cc]+ "[Param begins "+param[pptr]+" "+param[pptr+1]+"]");
+				OutputMessage("Unknown action "+act[cc]+ "[Param begins "+param[pptr]+" "+param[pptr+1]+"]");
 				break;
 		}
 	}
 	return(1+continuation);		
 }
 function ClearScreen() {
-    var room=document.getElementById("room");
-    room.innerHTML="<br>";
+    // var room=document.getElementById("header");
+    // room.innerHTML="<br>";
 
 }
-function debug(t) {
-   if (debugflag) 
-   	Output(t);	
-}
-function Output(t) {
-    var room=document.getElementById("room");
+function OutputMessage(t) {
+	var room=document.getElementById("message");
 	var s=room.innerHTML;
-	var j=0;
-	var k=0;
-	var n=0;
-	s=s+"<br>"+t;
+	s+=t;
     room.innerHTML=s;
 }
 function OutputAt(at,t) {
@@ -421,13 +429,13 @@ function OutputAt(at,t) {
 
 
 function PerformActions(vb,no) {
-    debug("performactions vb="+vb+", no="+no);
+	if(debug) console.log("performactions vb="+vb+", no="+no);
     var doagain=false;
 	var s="";
 // in command
     var d=BitFlags[DARKBIT];
 	if (vb==1 && no<=0) {
-	   Output("Enter a direction, too.");
+	   OutputMessage("Enter a direction, too.");
 	   return 0;
 	}
 	if((vb==1) && no>0 && (no<7)) {
@@ -438,9 +446,9 @@ function PerformActions(vb,no) {
 		   	d=false;
 		}
 		if(d) {
-			Output("Dangerous to move in the dark! ");
+			OutputMessage("Dangerous to move in the dark! ");
 		}
-	    //Output("moving "+no+" PlayerRoom="+PlayerRoom);
+	    //OutputMessage("moving "+no+" PlayerRoom="+PlayerRoom);
 		nl=Rooms[PlayerRoom].Exit[no-1];
 		if(nl!=0) {
 			PlayerRoom=nl;
@@ -448,15 +456,15 @@ function PerformActions(vb,no) {
 			return 0;
 		}
 		if(d) {
-			Output("You fell down and broke your neck.");
+			OutputMessage("You fell down and broke your neck.");
 			return 0;
 		}
-		Output("You can't go in that direction. ");
+		OutputMessage("You can't go in that direction. ");
 		return 0 ;
 	}
 	var fl= -1;
 	var ct=0;
-	debug("checking actions: vb="+vb+", no="+no);
+	if(debug) console.log("checking actions: vb="+vb+", no="+no);
 	for(ct=0;ct<Actions.length;ct++){
 		var vv; var nv;
 		vv=Actions[ct].Vocab;
@@ -472,7 +480,7 @@ function PerformActions(vb,no) {
 		if((vv==vb)||(doagain&&Actions[ct].Vocab==0)) {
 			if((vv==0 && RandomPercent(nv))||doagain||
 				(vv!=0 && (nv==no||nv==0))) {
-		debug("nv="+nv+", vv="+vv+",vb="+vb+", doagain="+doagain+", ct="+ct+",Actions[ct].Vocab="+Actions[ct].Vocab  );
+					if(debug) console.log("nv="+nv+", vv="+vv+",vb="+vb+", doagain="+doagain+", ct="+ct+",Actions[ct].Vocab="+Actions[ct].Vocab  );
 				var f2=0;
 				if(fl== -1) fl= -2;
 				if((f2=PerformLine(ct))>0) {
@@ -500,7 +508,7 @@ function PerformActions(vb,no) {
 					var f=0;
 					
 					if(d) {
-						Output("It is dark.<br>");
+						OutputMessage("It is dark.<br>");
 						return 0;
 					}
 					for(ct=0;ct<Items.length;ct++){
@@ -511,32 +519,32 @@ function PerformActions(vb,no) {
 							PerformActions(vb,no2);	/* Recursively check each items table code */
 							disable_sysfunc=0;
 							if(CountCarried()>=MaxCarry) {
-								Output("You are carrying too much. ");
+								OutputMessage("You are carrying too much. ");
 							}
 						 	Items[ct].Location= CARRIED;
-						 	Output(": O.K.<br>");
+						 	OutputMessage(": O.K.<br>");
 						 	f=1;
 						 }
 					}
 					if(f==0)
-						Output("Nothing taken.");
+						OutputMessage("Nothing taken.");
 					return 0;
 				}
 				if(no<=0){
-					Output("What ? ");
+					OutputMessage("What ? ");
 					return 0;
 				}
 				if( CountCarried() >= MaxCarry){
-					Output("You are carrying too much. ");
+					OutputMessage("You are carrying too much. ");
 					return 0;
 				}
 				i=MatchUpItem(NounText,PlayerRoom);
 				if(i<=0) {
-					Output("It is beyond your power to do that. ");
+					OutputMessage("It is beyond your power to do that. ");
 					return 0;
 				}
 				Items[i].Location= CARRIED;
-				Output("O.K. ");
+				OutputMessage("O.K. ");
 				return 0;
 			}
 			if(vb==18) {
@@ -550,26 +558,26 @@ function PerformActions(vb,no) {
 							PerformActions(vb,no2);
 							disable_sysfunc=0;
 							Items[ct].Location=PlayerRoom;
-							Output(Items[ct].Text);
-							Output(": O.K.<br>");
+							OutputMessage(Items[ct].Text);
+							OutputMessage(": O.K.<br>");
 							f=1;
 						}
 					}
 					if(f==0)
-						Output("Nothing dropped.<br>");
+						OutputMessage("Nothing dropped.<br>");
 					return 0;
 				}
 				if(no==-1) {
-					Output("What ? ");
+					OutputMessage("What ? ");
 					return 0;
 				}
 				i=MatchUpItem(NounText,CARRIED);
 				if(i==-1) {
-					Output("It's beyond your power to do that.<br>");
+					OutputMessage("It's beyond your power to do that.<br>");
 					return 0;
 				}
 				Items[i].Location=PlayerRoom;
-				Output("O.K. ");
+				OutputMessage("O.K. ");
 				return 0;
 			}
 		}
@@ -579,57 +587,58 @@ function PerformActions(vb,no) {
 }
 function ShowStuff() {
 // first show the location
-    var ct=0;
-	var r = Rooms[PlayerRoom];
-	var s=r.Text;
-	if( (BitFlags[DARKBIT]) && (Items[LIGHT_SOURCE].Location!=CARRIED)
-			&& (Items[LIGHT_SOURCE].Location!= PlayerRoom) ) {
-		s="You can't see. It is too dark!";
-	    OutputAt("location",s);
-		return;		
-	}
-// add the see also
-    s+="<br>";
-    for (ct=0;ct<Items.length;ct++) {
-		if (Items[ct].Location==PlayerRoom) {
-			s+=Items[ct].Text+"<br>";
-		}
-	}
-	OutputAt("location",s);
-// exits
-    s=""; 
-	for (ct=0;ct<6;ct++) {
-		if(r.Exit[ct]!=0) {
-			s+=ExitNames[ct]+"<br>";
-		}
-	}
-	OutputAt("exits",s);
-// inventory
-	s="";
-	for( ct=0;ct<Items.length;ct++) {
-		if(Items[ct].Location==CARRIED) {
-			s+=Items[ct].Text+"<br>";
-		}
-	}
-	OutputAt("inventory",s);
+//     var ct=0;
+// 	var r = Rooms[PlayerRoom];
+// 	var s="You are in a " + r.Text;
+// 	if( (BitFlags[DARKBIT]) && (Items[LIGHT_SOURCE].Location!=CARRIED)
+// 			&& (Items[LIGHT_SOURCE].Location!= PlayerRoom) ) {
+// 		s="You can't see. It is too dark!";
+// 	    OutputAt("room",s);
+// 		return;		
+// 	}
+// // add the see also
+//     s+="<br>";
+//     for (ct=0;ct<Items.length;ct++) {
+// 		if (Items[ct].Location==PlayerRoom) {
+// 			s+=Items[ct].Text+"<br>";
+// 		}
+// 	}
+//     OutputAt("room",s);
+// // exits
+//     s="Exits: "; 
+// 	for (ct=0;ct<6;ct++) {
+// 		if(r.Exit[ct]!=0) {
+// 			s+=ExitNames[ct]+",";
+// 		}
+// 	}
+// 	OutputAt("exits",s);
+// // inventory
+// 	s="";
+// 	for( ct=0;ct<Items.length;ct++) {
+// 		if(Items[ct].Location==CARRIED) {
+// 			s+=Items[ct].Text+"<br>";
+// 		}
+// 	}
+// 	OutputAt("inventory",s);
 
 }
 
 function Look() {
-    var room=document.getElementById("room");
     //room.innerHTML="Thinking";
+	var elem = document.getElementById('picture');
+	elem.appendChild(images[0]);
     var s="";
 	if( (BitFlags[DARKBIT]) && (Items[LIGHT_SOURCE].Location!=CARRIED)
 	            && (Items[LIGHT_SOURCE].Location!= PlayerRoom) ) {
-		Output("You can't see. It is too dark!");
+		OutputMessage("You can't see. It is too dark!");
 		return;
 	}
     //alert(Rooms[PlayerRoom]);
 	var r = Rooms[PlayerRoom];
 	if(r.Text.substring(0,1)=='*') {
-		s="<br>"+r.Text.substring(1);
+		s=r.Text.substring(1);
 	} else {
-		s="<br>Location: " + r.Text;
+		s="You are in a " + r.Text;
 	}
 	var ct=0;
 	var f=0;
@@ -651,7 +660,7 @@ function Look() {
     for (ct=0;ct<Items.length;ct++) {
 		if (Items[ct].Location==PlayerRoom) {
 			if (f==0) {
-				s+="<br>You can also see: ";
+				s+="<br>You can see: ";
 				f++;
 			}
 			s+=Items[ct].Text+", ";;
@@ -661,7 +670,7 @@ function Look() {
     	s=s.substring(0,s.length-2);
 	}
 	s+="<br>"; 
-   // Output(s);
+    OutputAt('room',s);
 }
 
 
@@ -698,6 +707,7 @@ function listNouns() {
 }
 
 function playGame() {
+	LoadImages();
 	setName();
 	listVerbs();
 	listNouns();
