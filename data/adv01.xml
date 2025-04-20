@@ -1851,8 +1851,10 @@
   <Noun>LAK</Noun>
   <Verb>OPE</Verb>
   <Noun>YOH</Noun>
+  <Rooms>
   <Room>
      <Text></Text>
+     <id>0</id>
      <Exit>0</Exit>
      <Exit>7</Exit>
      <Exit>10</Exit>
@@ -1862,6 +1864,7 @@
   </Room>
   <Room>
      <Text>dismal swamp</Text>
+     <id>0</id>
      <Exit>23</Exit>
      <Exit>0</Exit>
      <Exit>29</Exit>
@@ -1871,6 +1874,7 @@
   </Room>
   <Room>
      <Text>top of a tall cypress tree</Text>
+     <id>0</id>
      <Exit>0</Exit>
      <Exit>0</Exit>
      <Exit>0</Exit>
@@ -1880,6 +1884,7 @@
   </Room>
   <Room>
      <Text>damp hollow stump in the swamp</Text>
+     <id>0</id>
      <Exit>0</Exit>
      <Exit>0</Exit>
      <Exit>0</Exit>
@@ -1889,6 +1894,7 @@
   </Room>
   <Room>
      <Text>root chamber under the stump</Text>
+     <id>0</id>
      <Exit>0</Exit>
      <Exit>0</Exit>
      <Exit>0</Exit>
@@ -1898,6 +1904,7 @@
   </Room>
   <Room>
      <Text>semi-dark hole by the root chamber</Text>
+     <id>0</id>
      <Exit>0</Exit>
      <Exit>0</Exit>
      <Exit>0</Exit>
@@ -1907,6 +1914,7 @@
   </Room>
   <Room>
      <Text>long down sloping hall</Text>
+     <id>0</id>
      <Exit>0</Exit>
      <Exit>0</Exit>
      <Exit>0</Exit>
@@ -1916,6 +1924,7 @@
   </Room>
   <Room>
      <Text>large cavern</Text>
+     <id>0</id>
      <Exit>31</Exit>
      <Exit>9</Exit>
      <Exit>0</Exit>
@@ -1925,6 +1934,7 @@
   </Room>
   <Room>
      <Text>large 8 sided room</Text>
+     <id>0</id>
      <Exit>0</Exit>
      <Exit>31</Exit>
      <Exit>0</Exit>
@@ -1934,6 +1944,7 @@
   </Room>
   <Room>
      <Text>royal anteroom</Text>
+     <id>0</id>
      <Exit>7</Exit>
      <Exit>0</Exit>
      <Exit>0</Exit>
@@ -1943,6 +1954,7 @@
   </Room>
   <Room>
      <Text>*I'm on the shore of a lake</Text>
+     <id>1</id>
      <Exit>26</Exit>
      <Exit>29</Exit>
      <Exit>0</Exit>
@@ -1952,6 +1964,7 @@
   </Room>
   <Room>
      <Text>forest</Text>
+     <id>0</id>
      <Exit>11</Exit>
      <Exit>11</Exit>
      <Exit>23</Exit>
@@ -1961,6 +1974,7 @@
   </Room>
   <Room>
      <Text>maze of pits</Text>
+     <id>0</id>
      <Exit>13</Exit>
      <Exit>15</Exit>
      <Exit>15</Exit>
@@ -1970,6 +1984,7 @@
   </Room>
   <Room>
      <Text>maze of pits</Text>
+     <id>0</id>
      <Exit>0</Exit>
      <Exit>0</Exit>
      <Exit>0</Exit>
@@ -1979,6 +1994,7 @@
   </Room>
   <Room>
      <Text>maze of pits</Text>
+     <id>0</id>
      <Exit>17</Exit>
      <Exit>12</Exit>
      <Exit>13</Exit>
@@ -1988,6 +2004,7 @@
   </Room>
   <Room>
      <Text>maze of pits</Text>
+     <id>0</id>
      <Exit>12</Exit>
      <Exit>0</Exit>
      <Exit>13</Exit>
@@ -1997,6 +2014,7 @@
   </Room>
   <Room>
      <Text>maze of pits</Text>
+     <id>0</id>
      <Exit>0</Exit>
      <Exit>17</Exit>
      <Exit>0</Exit>
@@ -2006,6 +2024,7 @@
   </Room>
   <Room>
      <Text>maze of pits</Text>
+     <id>0</id>
      <Exit>17</Exit>
      <Exit>12</Exit>
      <Exit>12</Exit>
@@ -2017,6 +2036,7 @@
      <Text>*I'm at the bottom of a very deep chasm. High above me is
 a pair of ledges. One has a bricked up window across its face
 the other faces a Throne-room</Text>
+     <id>0</id>
      <Exit>0</Exit>
      <Exit>0</Exit>
      <Exit>0</Exit>
@@ -2027,6 +2047,7 @@ the other faces a Throne-room</Text>
   <Room>
      <Text>*I'm on a narrow ledge by a chasm. Across the chasm is
 the Throne-room</Text>
+     <id>0</id>
      <Exit>0</Exit>
      <Exit>0</Exit>
      <Exit>0</Exit>
@@ -2036,6 +2057,7 @@ the Throne-room</Text>
   </Room>
   <Room>
      <Text>royal chamber</Text>
+     <id>0</id>
      <Exit>0</Exit>
      <Exit>0</Exit>
      <Exit>0</Exit>
@@ -2046,6 +2068,7 @@ the Throne-room</Text>
   <Room>
      <Text>*I'm on a narrow ledge by a Throne-room
 Across the chasm is another ledge</Text>
+     <id>0</id>
      <Exit>0</Exit>
      <Exit>0</Exit>
      <Exit>0</Exit>
@@ -2055,6 +2078,7 @@ Across the chasm is another ledge</Text>
   </Room>
   <Room>
      <Text>throne room</Text>
+     <id>0</id>
      <Exit>0</Exit>
      <Exit>0</Exit>
      <Exit>0</Exit>
@@ -2064,6 +2088,7 @@ Across the chasm is another ledge</Text>
   </Room>
   <Room>
      <Text>sunny meadow</Text>
+     <id>1</id>
      <Exit>0</Exit>
      <Exit>1</Exit>
      <Exit>10</Exit>
@@ -2074,6 +2099,7 @@ Across the chasm is another ledge</Text>
   <Room>
      <Text>*I think I'm in real trouble now. There's a fellow here with
 a pitchfork and pointed tail. ...Oh Hell!</Text>
+     <id>0</id>
      <Exit>0</Exit>
      <Exit>0</Exit>
      <Exit>0</Exit>
@@ -2083,6 +2109,7 @@ a pitchfork and pointed tail. ...Oh Hell!</Text>
   </Room>
   <Room>
      <Text>hidden grove</Text>
+     <id>0</id>
      <Exit>11</Exit>
      <Exit>0</Exit>
      <Exit>1</Exit>
@@ -2092,6 +2119,7 @@ a pitchfork and pointed tail. ...Oh Hell!</Text>
   </Room>
   <Room>
      <Text>quick-sand bog</Text>
+     <id>0</id>
      <Exit>0</Exit>
      <Exit>0</Exit>
      <Exit>0</Exit>
@@ -2102,6 +2130,7 @@ a pitchfork and pointed tail. ...Oh Hell!</Text>
   <Room>
      <Text>Memory chip of a COMPUTER!
 I took a wrong turn!</Text>
+     <id>0</id>
      <Exit>0</Exit>
      <Exit>0</Exit>
      <Exit>7</Exit>
@@ -2112,6 +2141,7 @@ I took a wrong turn!</Text>
   <Room>
      <Text>top of an oak.
 To the East I see a meadow, beyond that a lake.</Text>
+     <id>0</id>
      <Exit>0</Exit>
      <Exit>0</Exit>
      <Exit>0</Exit>
@@ -2121,6 +2151,7 @@ To the East I see a meadow, beyond that a lake.</Text>
   </Room>
   <Room>
      <Text>*I'm at the edge of a BOTTOMLESS hole</Text>
+     <id>0</id>
      <Exit>10</Exit>
      <Exit>0</Exit>
      <Exit>0</Exit>
@@ -2131,6 +2162,7 @@ To the East I see a meadow, beyond that a lake.</Text>
   <Room>
      <Text>*I'm on a ledge just below the rim of the BOTTOMLESS hole. I
 don't think I want to go down</Text>
+     <id>0</id>
      <Exit>0</Exit>
      <Exit>0</Exit>
      <Exit>0</Exit>
@@ -2140,6 +2172,7 @@ don't think I want to go down</Text>
   </Room>
   <Room>
      <Text>long tunnel. I hear buzzing ahead</Text>
+     <id>0</id>
      <Exit>8</Exit>
      <Exit>7</Exit>
      <Exit>0</Exit>
@@ -2149,6 +2182,7 @@ don't think I want to go down</Text>
   </Room>
   <Room>
      <Text>*I'm in an endless corridor</Text>
+     <id>0</id>
      <Exit>32</Exit>
      <Exit>33</Exit>
      <Exit>32</Exit>
@@ -2159,6 +2193,7 @@ don't think I want to go down</Text>
   <Room>
      <Text>large misty room with strange
 unreadable letters over all the exits.</Text>
+     <id>0</id>
      <Exit>32</Exit>
      <Exit>24</Exit>
      <Exit>11</Exit>
@@ -2166,6 +2201,7 @@ unreadable letters over all the exits.</Text>
      <Exit>28</Exit>
      <Exit>24</Exit>
   </Room>
+</Rooms>
   <Message></Message>
   <Message>Nothing happens</Message>
   <Message>Chop 'er down!</Message>
@@ -2230,7 +2266,7 @@ something and then makes 'ME' vanish!</Message>
   <Message>Try 'LOOK, JUMP, SWIM, CLIMB, FIND, TAKE, SCORE, DROP'
 and any other verbs you can think of...</Message>
   <Message>There are only 3 ways to wake the Dragon!</Message>
-  <Message>Remember you can always say `HELP`</Message>
+  <Message> Remember you can always say `HELP`</Message>
   <Message>Read the sign in the meadow!</Message>
   <Message>You may need to say magic words here</Message>
   <Message>A VOICE BOOOOMS OUT:</Message>
@@ -2239,9 +2275,9 @@ and any other verbs you can think of...</Message>
   <Message>Medicine is good for bites.</Message>
   <Message>I don't know where it is</Message>
   <Message> 
-Welcome to Adventure number: 1 'ADVENTURELAND'.
+Welcome to Adventure number 1: 'ADVENTURELAND'.
 In this Adventure you're to find *TREASURES* and store them away.
-To see how well you're doing say: 'SCORE'</Message>
+To see how well you're doing say: 'SCORE'.</Message>
   <Message>Blow it up!</Message>
   <Message>Fish have escaped back to the lake.</Message>
   <Message>OK</Message>
