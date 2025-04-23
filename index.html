@@ -1,79 +1,89 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>SCOTT ADAMS ADVENTURE PACK</title>
-<link rel="stylesheet" href="css/style.css">
-</head>  
+<html>
+
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   <title>SCOTT ADAMS ADVENTURE PACK</title>
+   <link rel="stylesheet" href="css/style.css">
+</head>
+
 <body>
-<h1>SCOTT ADAMS ADVENTURE COLLECTION</h1>
-      <table width="100%" >
+   <h1>SCOTT ADAMS ADVENTURE COLLECTION</h1>
+   <table width="100%">
       <tr>
-      <td width="40%" valign="top"><form name="LD" method="post" action="">
-      Load new Game:
-      <select name="loader" class="sm" onChange="loadNewGame();">
-      <option value="">~Select A Game~</option>
-      <option value="adv01.xml">Adventureland</option>
-      <option value="adv02.xml">Pirate Adventure</option>
-      <option value="adv03.xml">Secret Mission</option>
-      <option value="adv04.xml">Voodoo Castle</option>
-      <option value="adv06.xml">Strange Odyssey</option>
-      <option value="adv07.xml">Mystery Fun House</option>
-      <option value="adv08.xml">Pyramid of Doom</option>
-      <option value="adv09.xml">Ghost Town</option>
-      <option value="adv10.xml">Savage Island, Part I</option>
-      <option value="adv11.xml">Savage Island, Part II</option>
-      <option value="adv12.xml">The Golden Voyage</option>
-      <option value="adv13.xml">Sorcerer of Claymorgue Castle</option>
-      <option value="adv14a.xml">Return to Pirate's Isle</option>
-      <option value="adv14b.xml">Buckaroo Banzai</option>
-      </select>
-      </form></td>
+         <td width="40%" valign="top">
+            <form name="LD" method="post" action="">
+               Load new Game:
+               <select name="loader" class="sm" onChange="loadNewGame();">
+                  <option value="">~Select A Game~</option>
+                  <option value="adv01.xml">Adventureland</option>
+                  <option value="adv02.xml">Pirate Adventure</option>
+                  <option value="adv03.xml">Secret Mission</option>
+                  <option value="adv04.xml">Voodoo Castle</option>
+                  <option value="adv06.xml">Strange Odyssey</option>
+                  <option value="adv07.xml">Mystery Fun House</option>
+                  <option value="adv08.xml">Pyramid of Doom</option>
+                  <option value="adv09.xml">Ghost Town</option>
+                  <option value="adv10.xml">Savage Island, Part I</option>
+                  <option value="adv11.xml">Savage Island, Part II</option>
+                  <option value="adv12.xml">The Golden Voyage</option>
+                  <option value="adv13.xml">Sorcerer of Claymorgue Castle</option>
+                  <option value="adv14a.xml">Return to Pirate's Isle</option>
+                  <option value="adv14b.xml">Buckaroo Banzai</option>
+               </select>
+            </form>
+         </td>
       </tr>
-      </table>
-<table visible = "false">
-   <tr halign="left">
-   <td>      
-      <span id="message"></span>
-   </td>
-   </tr>
+   </table>
+   <table visible="false">
       <tr halign="left">
-      <td>
-         <span id="room"></span>
-         <p>
-      <form action="#" method="get" name="SA" id="SA" onSubmit="MainLine(); return false;">Enter Command:
-      <input name="cmd" type="text" class="sm" />   
-      <input type="submit" name="Submit" value="Submit" /></form>
-      <br>
-      Commands are two words, a verb and a noun, like &quot;Get Axe&quot; or
-      &quot;Enter Hole&quot;. Only the the first three letters of a word count.
-       </td>
-       <td>
-         <div id="picture"></div>
-      </td>
+         <td>
+            <span id="message"></span>
+         </td>
       </tr>
-      <tr halign="left" >
-     
+      <tr halign="left">
+         <td>
+            <span id="room"></span>
+            <p>
+            <form action="#" method="get" name="SA" id="SA" onSubmit="MainLine(); return false;">Enter Command:
+               <input name="cmd" type="text" class="sm" />
+               <input type="submit" name="Submit" value="Submit" />
+            </form>
+            <br>
+            Commands are two words, a verb and a noun, like &quot;Get Axe&quot; or
+            &quot;Enter Hole&quot;. Only the the first three letters of a word count.
+         </td>
+         <td>
+            <img id="picture"></div>
+         </td>
       </tr>
-     
+      <tr halign="left">
+
+      </tr>
+
       <input style="visibility: hidden;" type="submit" name="Submit" value="Submit" />
       <span id="gamename">&nbsp;</span>
-      </table>
-      <table width="50%" halign="center">
-      <tr halign="center" >
-      <td>Some Possible Verbs</td>
-      <td>Some Possible Nouns</td>
+   </table>
+   <table width="50%" halign="center">
+      <tr halign="center">
+         <td>Some Possible Verbs</td>
+         <td>Some Possible Nouns</td>
       </tr>
       <tr halign="center" background="#FFFFCC">
-      <td valign="top"><span id="verblist"></span></td>
-      <td valign="top"><span id="nounlist"></span></td>
+         <td valign="top"><span id="verblist"></span></td>
+         <td valign="top"><span id="nounlist"></span></td>
       </tr>
-      </table>
+   </table>
 
-<script language="javascript" src="js/load.js" type="text/javascript"></script>
-<script language="javascript" src="js/game.js" type="text/javascript"></script>
-<script language="JavaScript">
-function loadNewGame(){
-var s = document.LD.loader.options[document.LD.loader.selectedIndex].value;
-   loadGame('data/'+s);
-}
-</script>
+   <script language="javascript" src="js/boot.js" type="text/javascript"></script>
+   <script language="javascript" src="js/load.js" type="text/javascript"></script>
+   <script language="javascript" src="js/game.js" type="text/javascript"></script>
+   <script language="JavaScript">
+      function loadNewGame() {
+         var s = document.LD.loader.options[document.LD.loader.selectedIndex].value;
+         loadGame('data/' + s);
+      }
+   </script>
 
-</body></html>
+</body>
+
+</html>

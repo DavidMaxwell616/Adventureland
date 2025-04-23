@@ -1,18 +1,3 @@
-var ExitNames = new Array("North", "South", "East", "West", "Up", "Down");
-
-var verb = "";
-var noun = "";
-var NounText = "";
-var currentImage = 0;
-var disable_sysfunc = 0; // recursion block
-var images = [];
-var DARKBIT = 15;
-var LIGHTOUTBIT = 16;
-var LIGHT_SOURCE = 9;
-var CARRIED = 255;
-var DESTROYED = 0;
-var RoomSaved = new Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-const debug = true;
 function MainLine() {
 	ClearScreen();
 	// this is the inside of the main loop. This should get punched when the user hits enter
@@ -632,7 +617,6 @@ function Look() {
 		return;
 	}
 	var r = Rooms[PlayerRoom];
-	currentImage = r.id;
 	if (r.Text.substring(0, 1) == '*') {
 		s = r.Text.substring(1);
 	} else {
@@ -669,12 +653,13 @@ function Look() {
 	}
 	s += "<br>";
 	OutputAt('room', s);
+	currentImage = r.id;
 	updateImage();
 }
 
 function updateImage() {
 	var elem = document.getElementById('picture');
-	elem.appendChild(images[currentImage]);
+	elem.src = images[currentImage].src;
 }
 
 function setName() {
@@ -740,9 +725,6 @@ function WhichWord(word, list) {
 	return (-1);
 }
 
-
-
-
 function GetInput() {
 	var s = document.SA.cmd.value;
 	document.SA.cmd.value = "";
@@ -779,6 +761,7 @@ function RandomPercent(n) {
 		return (true);
 	return (false);
 }
+
 function MatchUpItem(text, loc) {
 	var word = MapSynonym(text);
 	var ct = 0;
@@ -791,7 +774,7 @@ function MatchUpItem(text, loc) {
 	}
 	return (-1);
 }
-var lastword = "";
+
 function MapSynonym(word) {
 	var n = 1;
 	var tp = "";
@@ -811,6 +794,7 @@ function MapSynonym(word) {
 	}
 	return ("");
 }
+
 function CountCarried() {
 	var ct = 0;
 	var n = 0;

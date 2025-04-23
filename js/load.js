@@ -1,24 +1,3 @@
-// Scott Adams Javascript interpreter
-//
-// these are the variables used by the game
-//
-var gamename = "";
-var NumItems;
-var NumActions;
-var NumWords;
-var NumRooms;
-var MaxCarry;
-var PlayerRoom;
-var Treasures;
-var WordLength;
-var LightTime;
-var LightRefill;
-var NumMessages;
-var TreasureRoom;
-var CurrentCounter = 0;
-var Actions = new Array();
-var SavedRoom = 0;
-var Counters = new Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 function Action() {
 	this.Vocab = "";
 	this.Condition = new Array();
@@ -318,7 +297,6 @@ function parseData(xml) {
 			y = 0;
 			Rooms[x] = new Room();
 			var fc = ni[j].childNodes;
-			Rooms[x].Index = fc;
 			for (k = 0; k < fc.length; k++) {
 				if (fc[k].nodeType == 1) {
 					var nn = fc[k].nodeName;
@@ -326,11 +304,13 @@ function parseData(xml) {
 						case 0:
 							if (fc[k].firstChild != null) {
 								Rooms[x].Text = fc[k].firstChild.data;
+
 							} else {
 								Rooms[x].Text = "";
 							}
 							break;
 						case 1:
+							Rooms[x].id = fc[k].firstChild.data;
 						case 2:
 						case 3:
 						case 4:
